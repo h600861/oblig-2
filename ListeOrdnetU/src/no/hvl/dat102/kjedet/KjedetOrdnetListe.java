@@ -158,5 +158,20 @@ public class KjedetOrdnetListe<T extends Comparable<T>> implements OrdnetListeAD
 		  } 
 		return resultat;
 	}
+	
+	public String toString() {
+		String resultat = "";
 
+		
+		LinearNode current = foerste;
+		while (current != null) {
+			resultat += current.getElement();
+			if (current.getNeste() != null) {
+				resultat += "\n";
+			}
+			current = current.getNeste();
+		}
+		
+		return resultat;
+	}
 }

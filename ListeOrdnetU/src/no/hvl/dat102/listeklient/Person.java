@@ -49,20 +49,37 @@ public class Person implements Comparable<Person> {
 	}
 
 	public int compareTo(Person denAndrePersonen) {
-		int resultat = 0;
-		
-		if (this.foedselsaar < denAndrePersonen.getFoedselsaar()) {
-			resultat = -1;
-		}else if (foedselsaar == denAndrePersonen.getFoedselsaar()){
-			if (this.etternavn == denAndrePersonen.getEtternavn() || this.fornavn == denAndrePersonen.getFornavn()) {
+			
+			int resultat = 0;
+			if (foedselsaar < denAndrePersonen.foedselsaar) {
+				resultat = -1;
+			}
+			else if (foedselsaar > denAndrePersonen.foedselsaar) {
 				
 			}
-			resultat = 0;
-		}else
-		
-		resultat = 1;
-		
-		return resultat;
+			
+			else {
+				if (etternavn.compareTo(denAndrePersonen.etternavn) > 0) {
+					resultat = -1;
+				}
+				else if (etternavn.compareTo(denAndrePersonen.etternavn) < 0) {
+					resultat = 1;
+				}
+				else {
+					if (fornavn.compareTo(denAndrePersonen.fornavn) > 0) {
+						resultat = -1;
+					}
+					else if (fornavn.compareTo(denAndrePersonen.fornavn) < 0) {
+						resultat = 1;
+				}
+					else {
+						resultat = 0;
+					}
+			}
+			
+
+			}
+			return resultat;
+		}
 	}//
 
-}// class

@@ -2,41 +2,55 @@ package no.hvl.dat102.listeklient;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
+import no.hvl.dat102.kjedet.KjedetOrdnetListe;
 import no.hvl.dat102.tabell.TabellOrdnetListe;
 
 public class main {
 	
-	public static void main (String [] args) {
-		TabellOrdnetListe<String> navneListe1 = new TabellOrdnetListe<String>();
-		   TabellOrdnetListe<String> navneListe2 = new TabellOrdnetListe<String>();
+public static Person lesInnPerson() {
+		
+		String fornavn = JOptionPane.showInputDialog("Fornavn:");
+		String etternavn = JOptionPane.showInputDialog("Etternavn:");
+		int fodselsaar = 0;
+		
+		boolean works;
+		do {
+			works = true;
+		
+			try {
+				fodselsaar = Integer.parseInt(JOptionPane.showInputDialog("Fodselsaar:"));
+			}
+			catch (NumberFormatException e) {
+				works = false;
+			}
+		}
+			while (!works);
+				return new Person(fornavn, etternavn, fodselsaar);
+	}
+	
+	public static void main(String[] args) {
+		
+		TabellOrdnetListe<Person> navneListe1 = new TabellOrdnetListe<Person>();
+		KjedetOrdnetListe<Person> navneListe2 = new KjedetOrdnetListe<Person>();
 
-		    Scanner tast = new Scanner(System.in);
-		    String navn, svar;
+		
+		
+		navneListe1.leggTil(lesInnPerson());
+		navneListe1.leggTil(lesInnPerson());
+		navneListe1.leggTil(lesInnPerson());
+//		navneListe1.leggTil(lesInnPerson());
+//		
+//		navneListe2.leggTil(lesInnPerson());
+//		navneListe2.leggTil(lesInnPerson());
+//		navneListe2.leggTil(lesInnPerson());
+//		navneListe2.leggTil(lesInnPerson());
+		
+		System.out.println(navneListe1.toString());
+		System.out.println(navneListe2.toString());
 
-		    do{
-		          System.out.println("Oppgi navn: ");
-		          navn   = tast.nextLine();
-		          
-		          navneListe1.leggTil(navn);
-		          navneListe2.leggTil(navn);
-
-		          System.out.print("Oppgi flere navn [J/N]?:");
-		          svar = tast.nextLine();
-		       tast.close();
-
-		      } while(svar.equals("j")|| svar.equals("J"));
-
-
-		       System.out.println("\n\nNavnelisten i stigende ordning:");
-
-		        while(navneListe1.antall() > 0)
-		              System.out.print(navneListe1.fjernFoerste() + " ");
-
-
-		      
-		       System.out.println("\n\nNavnelisten i fallende ordning:");
-
-		        while(navneListe2.antall() > 0)
-		           System.out.print(navneListe2.fjernSiste() + " ");
 	}
 }
+
+	
